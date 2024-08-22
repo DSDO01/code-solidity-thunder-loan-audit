@@ -12,10 +12,6 @@ contract OracleUpgradeable is Initializable {
         __Oracle_init_unchained(poolFactoryAddress);
     }
 
-    function __Oracle_init_unchained(address poolFactoryAddress) internal onlyInitializing {
-        s_poolFactory = poolFactoryAddress;
-    }
-
     function getPriceInWeth(address token) public view returns (uint256) {
         address swapPoolOfToken = IPoolFactory(s_poolFactory).getPool(token);
         return ITSwapPool(swapPoolOfToken).getPriceOfOnePoolTokenInWeth();
